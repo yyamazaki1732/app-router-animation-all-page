@@ -1,20 +1,70 @@
+// 'use client';
+
+// import { useEffect } from 'react';
+// import { animatePageIn } from '@/app/animations';
+
+// export default function Template({ children }: { children: React.ReactNode }) {
+//   useEffect(() => {
+//     animatePageIn();
+//   }, []);
+
+//   return (
+//     <div>
+//       <div
+//         id='transition-element'
+//         className='w-screen h-screen bg-black z-100 fixed top-0 left-0'
+//       ></div>
+//       {children}
+//     </div>
+//   );
+// }
+
 'use client';
 
-import { useEffect } from 'react';
-import { animatePageIn } from '@/app/animations';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { gsap } from 'gsap';
+import { useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
+import { TransitionButton } from '@/app/components/TransitionButton';
 
 export default function Template({ children }: { children: React.ReactNode }) {
+  const buttonRef = useRef<HTMLAnchorElement>(null);
+  const slideInRef = useRef<HTMLDivElement>(null);
+  const visible = { opacity: 1, y: 0, transition: { duration: 0.5 } };
+  const itemVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible,
+  };
+  const router = useRouter();
   useEffect(() => {
-    animatePageIn();
+    gsap.set(slideInRef.current, { scaleX: 0 });
+    buttonRef.current?.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      gsap.to(slideInRef.current, {
+        scaleX: 1,
+        duration: 0.8,
+        ease: 'power3.inOut',
+        onComplete: () => {
+          router.push('/about');
+        },
+      });
+    });
   }, []);
 
   return (
-    <div>
+    <main>
+      <div className='my-element'>
+        <Link ref={buttonRef} href={'/about'} passHref>
+          Hello, world!
+        </Link>
+      </div>
       <div
-        id='transition-element'
-        className='w-screen h-screen bg-black z-100 fixed top-0 left-0'
+        ref={slideInRef}
+        className='slide-in w-full h-screen bg-blue-200 fixed top-0 left-0 origin-left  '
       ></div>
       {children}
-    </div>
+    </main>
   );
 }
