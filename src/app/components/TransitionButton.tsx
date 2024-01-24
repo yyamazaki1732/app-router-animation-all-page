@@ -2,7 +2,6 @@
 
 import { useRouter } from 'next/navigation';
 import { animatePageOut } from '@/app/animations';
-import Link from 'next/link';
 
 export const TransitionButton = ({
   href,

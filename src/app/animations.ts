@@ -30,7 +30,6 @@ export const animatePageOut = (href: string, router: AppRouterInstance) => {
   const animationWrapper = document.getElementById('transition-element');
 
   if (animationWrapper) {
-    console.log(animationWrapper);
     const tl = gsap.timeline();
 
     tl.set(animationWrapper, {
@@ -43,11 +42,8 @@ export const animatePageOut = (href: string, router: AppRouterInstance) => {
       .to(animationWrapper, {
         xPercent: 0,
         duration: 0.8,
-        onStart: () => {
-          console.log('start');
-        },
         onComplete: () => {
-          router.push('/service');
+          router.push(href);
         },
       })
       .to(

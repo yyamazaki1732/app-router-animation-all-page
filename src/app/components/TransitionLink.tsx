@@ -2,27 +2,31 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { gsap } from 'gsap';
+import { useEffect, useRef } from 'react';
+import { animatePageOut } from '@/app/animations';
 
-export const TransitionButton = ({ href, children }: any) => {
+export const TransitionLink = ({ href, label }: any) => {
+  const linkRef = useRef<HTMLAnchorElement>(null);
   const router = useRouter();
 
-  const handleClick = (e: any) => {
-    e.preventDefault();
-    // Exitアニメーションの開始
-    gsap.to('.page-transition-div', {
-      duration: 1,
-      opacity: 0,
-      onComplete: () => {
-        // アニメーション完了後にページ遷移
-        router.push(href);
-      },
+  function handleClick() {
+    animatePageOut(href, router);
+  }
+
+  useEffect(() => {
+    linkRef.current?.addEventListener('click', (e) => {
+      e.preventDefault();
+      handleClick();
     });
-  };
+  }, []);
 
   return (
-    <Link href={href} className='p-6 bg-green-200 inline-block' passHref>
-      <span onClick={handleClick}>{children}</span>
+    <Link
+      ref={linkRef}
+      href={href}
+      className='p-4 bg-green-200 inline-block rounded-xl hover:bg-green-300 '
+    >
+      <span onClick={handleClick}>{label}</span>
     </Link>
   );
 };
