@@ -1,12 +1,11 @@
 'use client';
-
 import { TransitionButton } from '@/app/componets/TransitionButton';
 
-export default function Home() {
+export default function Service() {
   return (
-    <>
-      <div>Home Page</div>{' '}
+    <div>
+      <div>Service Page</div>
       <TransitionButton href={'/about'}>AboutTest</TransitionButton>
-    </>
+    </div>
   );
 }
