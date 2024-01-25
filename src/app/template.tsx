@@ -35,7 +35,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
       <div
         id='transition-element'
         ref={slideInRef}
-        className='slide-in w-full h-screen bg-blue-200 fixed top-0 left-0 origin-left'
+        className='slide-in w-40 h-40  bg-blue-200 fixed top-1/2 left-1/2'
       ></div>
       {children}
     </main>
