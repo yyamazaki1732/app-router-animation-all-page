@@ -1,3 +1,9 @@
+## 中身
+next.js　（ app router ）で、gsapやframer motionでページ遷移を試みたコード。
+実際は、実装できなかったけど、以下の機能は実装できた。
+「全ページ共通のgsapの関数を配置、任意のコンポーネントにて、任意にイベントをフックとして、そのgsapの関数を作動させる」
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
